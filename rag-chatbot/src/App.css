@@ -1,0 +1,135 @@
+/* App.css */
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  background: #121212;
+  color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.chat-container {
+  background: #1e1e1e;
+  width: 100%;
+  max-width: 500px;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0,0,0,0.7);
+}
+
+h1 {
+  text-align: center;
+  margin: 0;
+  padding: 16px;
+  background: #272727;
+  font-size: 1.4rem;
+  border-bottom: 1px solid #333;
+}
+
+.chat-box {
+  flex: 1;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.user-msg, .bot-msg {
+  max-width: 80%;
+  margin-bottom: 10px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  line-height: 1.4;
+  word-wrap: break-word;
+  font-size: 0.95rem;
+}
+
+.user-msg {
+  align-self: flex-end;
+  background: #0078ff;
+  color: #fff;
+}
+
+.bot-msg {
+  align-self: flex-start;
+  background: #2e2e2e;
+  color: #e0e0e0;
+}
+
+.input-box {
+  display: flex;
+  border-top: 1px solid #333;
+  background: #272727;
+}
+
+.input-box input {
+  flex: 1;
+  padding: 10px 12px;
+  border: none;
+  background: transparent;
+  color: #f5f5f5;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.input-box button {
+  background: #0078ff;
+  color: #fff;
+  border: none;
+  padding: 0 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.input-box button:hover {
+  background: #005fcc;
+}
+
+.audio-buttons {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background: #1e1e1e;
+}
+
+.audio-buttons button,
+.audio-buttons .file-input {
+  flex: 1;
+  margin: 0 5px;
+  background: #444;
+  color: #fff;
+  border: none;
+  padding: 8px 0;
+  font-size: 0.85rem;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.audio-buttons button:hover,
+.audio-buttons .file-input:hover {
+  background: #555;
+}
+
+.file-input {
+  padding-left: 4px;
+}
+
+@media (max-width: 600px) {
+  .chat-container {
+    max-width: 100%;
+    height: 100vh;
+    border-radius: 0;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+  }
+}
+

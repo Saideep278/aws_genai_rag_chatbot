@@ -1,0 +1,12 @@
+version: "3.0"
+
+intents:
+  - ask_question
+
+actions:
+  - action_call_rag_backend
+
+responses:
+  utter_default:
+    - text: "Sorry, I didn't get that. Can you rephrase?"
+

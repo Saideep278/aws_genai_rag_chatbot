@@ -1,0 +1,7 @@
+version: "3.0"
+rules:
+- rule: Call RAG backend when user asks anything
+  steps:
+  - intent: ask_question
+  - action: action_call_rag_backend
+
