@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { sendTextQuery, sendAudioFileToWhisper } from "./api/rasa";
 import "./App.css";
 
 export default function App() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const chatBoxRef = useRef(null);
+
+  useEffect(() => {
+    if (chatBoxRef.current) {
+      chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+    }
+  }, [messages]);
 
   const handleSendText = async () => {
     if (!input.trim()) return;
@@ -30,15 +38,12 @@ export default function App() {
     setMessages((prev) => [...prev, { text: "[Audio file uploaded]", sender: "user" }]);
 
     try {
-      // Step 1: Call Whisper backend to transcribe audio
       const whisperData = await sendAudioFileToWhisper(file);
-      const transcription = whisperData.transcription || whisperData.text;
+      const transcription = whisperData.transcribed_text || whisperData.text;
 
       if (transcription) {
-        // Show transcription as user message
         setMessages((prev) => [...prev, { text: transcription, sender: "user" }]);
 
-        // Step 2: Send transcription to Rasa
         const rasaResponse = await sendTextQuery(transcription);
         rasaResponse.forEach((msg) => {
           if (msg.text) {
@@ -55,41 +60,57 @@ export default function App() {
   };
 
   const handleStartRecording = () => {
-    alert("Recording feature not implemented yet!");
-    // You can add MediaRecorder/Web Audio API here later
+    alert("🎙️ Voice recording is not implemented yet!");
   };
 
   return (
-    <div className="chat-container">
-      <h1>🧠 RAG Voice Chatbot</h1>
-      <div className="chat-box">
-        {messages.map((msg, i) => (
-          <div
-            key={i}
-            className={msg.sender === "user" ? "user-msg" : "bot-msg"}
-          >
-            {msg.text}
+    <>
+      <div className="background-image left"></div>
+      <div className="background-image right"></div>
+
+      <div className="chat-toggle" onClick={() => setIsChatOpen(!isChatOpen)}>
+        💬
+      </div>
+
+      {isChatOpen && (
+        <div className="chat-popup">
+          <div className="chat-header">
+            <h3>🧠 RAG Voice Chatbot</h3>
+            <button onClick={() => setIsChatOpen(false)}>×</button>
           </div>
-        ))}
-      </div>
-      <div className="input-box">
-        <input
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Type your question..."
-        />
-        <button onClick={handleSendText}>Send</button>
-      </div>
-      <div className="audio-buttons">
-        <button onClick={handleStartRecording}>Start Recording</button>
-        <input
-          type="file"
-          accept="audio/*"
-          onChange={handleFileUpload}
-          className="file-input"
-        />
-      </div>
-    </div>
+
+          <div className="chat-box" ref={chatBoxRef}>
+            {messages.map((msg, i) => (
+              <div
+                key={i}
+                className={msg.sender === "user" ? "user-msg" : "bot-msg"}
+              >
+                {msg.text}
+              </div>
+            ))}
+          </div>
+
+          <div className="input-box">
+            <input
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Type your question..."
+              onKeyDown={(e) => e.key === "Enter" && handleSendText()}
+            />
+            <button onClick={handleSendText}>Send</button>
+          </div>
+
+          <div className="audio-buttons">
+            <button onClick={handleStartRecording}>🎙️ Start Recording</button>
+            <input
+              type="file"
+              accept="audio/*"
+              onChange={handleFileUpload}
+              className="file-input"
+            />
+          </div>
+        </div>
+      )}
+    </>
   );
 }
-
