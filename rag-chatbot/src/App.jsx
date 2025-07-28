@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { sendTextQuery, sendAudioFileToWhisper } from "./api/rasa";
 import "./App.css";
+import image1 from "./images/image1.jpg";
+import image2 from "./images/image2.jpg";
 
 export default function App() {
   const [messages, setMessages] = useState([]);
@@ -65,8 +67,18 @@ export default function App() {
 
   return (
     <>
-      <div className="background-image left"></div>
-      <div className="background-image right"></div>
+      <div className="navbar">🌾 Farming Culture</div>
+
+      <div className="background-container">
+        <div
+          className="background-half"
+          style={{ backgroundImage: `url(${image1})` }}
+        ></div>
+        <div
+          className="background-half"
+          style={{ backgroundImage: `url(${image2})` }}
+        ></div>
+      </div>
 
       <div className="chat-toggle" onClick={() => setIsChatOpen(!isChatOpen)}>
         💬
@@ -111,6 +123,8 @@ export default function App() {
           </div>
         </div>
       )}
+
+      <div className="footer">📞 Contact Us</div>
     </>
   );
 }
