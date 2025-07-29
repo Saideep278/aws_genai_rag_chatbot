@@ -1,12 +1,33 @@
-version: "3.0"
+version: "3.1"
 
 intents:
   - ask_question
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
 
 actions:
   - action_call_rag_backend
 
 responses:
+  utter_greet:
+    - text: "Hello! How can I help you today?"
+
+  utter_happy:
+    - text: "Great, carry on!"
+
+  utter_cheer_up:
+    - text: "Here’s something to cheer you up: 😊 Keep going, you're awesome!"
+
+  utter_did_that_help:
+    - text: "Did that help you?"
+
+  utter_goodbye:
+    - text: "Bye! Have a nice day!"
+
   utter_default:
     - text: "Sorry, I didn't get that. Can you rephrase?"
-
