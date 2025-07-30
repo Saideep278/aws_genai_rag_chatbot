@@ -1,10 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
-import { sendTextQuery, sendAudioFileToWhisper } from "./api/rasa";
+import { Outlet } from "react-router-dom";
+import Navbar from "./components/Navbar";
 import "./App.css";
-import image1 from "./images/image1.jpg";
-import image2 from "./images/image2.jpg";
 
-export default function App() {
+function AppLayout() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -15,6 +14,14 @@ export default function App() {
       chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
     }
   }, [messages]);
+
+  const sendTextQuery = async (text) => {
+    return [{ text: `Echo: ${text}` }]; // Placeholder
+  };
+
+  const sendAudioFileToWhisper = async (file) => {
+    return { text: "Transcribed sample text from audio." }; // Placeholder
+  };
 
   const handleSendText = async () => {
     if (!input.trim()) return;
@@ -36,16 +43,12 @@ export default function App() {
   const handleFileUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
-
     setMessages((prev) => [...prev, { text: "[Audio file uploaded]", sender: "user" }]);
-
     try {
       const whisperData = await sendAudioFileToWhisper(file);
       const transcription = whisperData.transcribed_text || whisperData.text;
-
       if (transcription) {
         setMessages((prev) => [...prev, { text: transcription, sender: "user" }]);
-
         const rasaResponse = await sendTextQuery(transcription);
         rasaResponse.forEach((msg) => {
           if (msg.text) {
@@ -67,22 +70,10 @@ export default function App() {
 
   return (
     <>
-      <div className="navbar">🌾 Farming Culture</div>
+      <Navbar />
+      <Outlet />
 
-      <div className="background-container">
-        <div
-          className="background-half"
-          style={{ backgroundImage: `url(${image1})` }}
-        ></div>
-        <div
-          className="background-half"
-          style={{ backgroundImage: `url(${image2})` }}
-        ></div>
-      </div>
-
-      <div className="chat-toggle" onClick={() => setIsChatOpen(!isChatOpen)}>
-        💬
-      </div>
+      <div className="chat-toggle" onClick={() => setIsChatOpen(!isChatOpen)}>💬</div>
 
       {isChatOpen && (
         <div className="chat-popup">
@@ -93,10 +84,7 @@ export default function App() {
 
           <div className="chat-box" ref={chatBoxRef}>
             {messages.map((msg, i) => (
-              <div
-                key={i}
-                className={msg.sender === "user" ? "user-msg" : "bot-msg"}
-              >
+              <div key={i} className={msg.sender === "user" ? "user-msg" : "bot-msg"}>
                 {msg.text}
               </div>
             ))}
@@ -114,12 +102,7 @@ export default function App() {
 
           <div className="audio-buttons">
             <button onClick={handleStartRecording}>🎙️ Start Recording</button>
-            <input
-              type="file"
-              accept="audio/*"
-              onChange={handleFileUpload}
-              className="file-input"
-            />
+            <input type="file" accept="audio/*" onChange={handleFileUpload} className="file-input" />
           </div>
         </div>
       )}
@@ -128,3 +111,5 @@ export default function App() {
     </>
   );
 }
+
+export default AppLayout;

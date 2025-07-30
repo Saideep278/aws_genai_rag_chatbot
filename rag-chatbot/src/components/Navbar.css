@@ -1,0 +1,40 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0f172a; /* Dark blue-gray */
+  padding: 12px 24px;
+  color: #ffffff;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.nav-brand {
+  font-size: 20px;
+  font-weight: bold;
+  color: #38bdf8; /* Tailwind Sky-400 */
+}
+
+.nav-links {
+  display: flex;
+  gap: 16px;
+}
+
+.nav-links button {
+  background: transparent;
+  border: none;
+  color: #f1f5f9;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 6px 10px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  border-radius: 6px;
+}
+
+.nav-links button:hover {
+  background-color: #1e293b; /* Dark hover */
+  color: #38bdf8;
+}
