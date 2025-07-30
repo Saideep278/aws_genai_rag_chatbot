@@ -2,39 +2,78 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #0f172a; /* Dark blue-gray */
-  padding: 12px 24px;
-  color: #ffffff;
+  background: linear-gradient(to right, #0f172a, #1e293b);
+  padding: 14px 28px;
+  color: #fff;
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 999;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 0 0 12px 12px;
 }
 
 .nav-brand {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: bold;
-  color: #38bdf8; /* Tailwind Sky-400 */
+  color: #38bdf8;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.nav-brand:hover {
+  color: #0ea5e9;
+}
+
+.nav-center {
+  display: flex;
+  align-items: center;
+  gap: 28px;
 }
 
 .nav-links {
   display: flex;
-  gap: 16px;
+  gap: 20px;
 }
 
-.nav-links button {
+.nav-item {
+  color: #f1f5f9;
+  text-decoration: none;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  padding: 8px 14px;
+  border-radius: 8px;
+}
+
+.nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #38bdf8;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background-color: #334155;
+  padding: 6px 10px;
+  border-radius: 8px;
+  position: relative;
+  gap: 6px;
+}
+
+.search-icon {
+  color: #94a3b8;
+  font-size: 18px;
+}
+
+.search-box input {
   background: transparent;
   border: none;
+  outline: none;
   color: #f1f5f9;
-  font-size: 16px;
-  cursor: pointer;
-  padding: 6px 10px;
-  transition: background-color 0.2s ease, color 0.2s ease;
-  border-radius: 6px;
+  font-size: 14px;
+  width: 140px;
 }
 
-.nav-links button:hover {
-  background-color: #1e293b; /* Dark hover */
-  color: #38bdf8;
+.search-box input::placeholder {
+  color: #94a3b8;
 }

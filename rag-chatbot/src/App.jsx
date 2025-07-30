@@ -9,7 +9,7 @@ import "./App.css";
 function AppLayout() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
-  const [isChatOpen, setIsChatOpen] = useState(true);
+  const [isChatOpen, setIsChatOpen] = useState(false);
   const chatBoxRef = useRef(null);
 
   useEffect(() => {
