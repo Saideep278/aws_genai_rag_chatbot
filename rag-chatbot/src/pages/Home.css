@@ -1,8 +1,10 @@
 .carousel-container {
   margin-top: 72px; /* Add margin to sit below navbar */
-  width: 100%;
+  width: 97%;
   max-height: 500px;
   overflow: hidden;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .carousel-image {

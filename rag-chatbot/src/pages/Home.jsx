@@ -1,26 +1,42 @@
 import React from "react";
 import Slider from "react-slick";
 import image1 from "../images/image1.jpg";
-import image2 from "../images/image1.jpg";
-import image3 from "../images/image2.jpg"; // <-- Add a third image
+import image2 from "../images/image2.jpg";
+import image3 from "../images/image3.jpg"; // <-- Add a third image
 import "./Home.css";
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+import journeyImg from  "../images/image1.jpg";
 export default function Home() {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 600,
     autoplay: true,
-    autoplaySpeed: 4000,
+    autoplaySpeed: 3000,   // faster (3s per slide)
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: false,
+    arrows: true,          // shows left/right arrows
+    pauseOnHover: true     // pauses when hovered
   };
 
   return (
-    <>
+    <>  
+      <br />
+      <br />
+      <br />
+      <>
+          <section className="hero-section">
+                <div className="hero-text">
+                  <h1>FRUVI Beverages </h1>
+                  <p>
+                    FRUVI Beverages began with a bold vision: crafting beverages that balance health, taste, and sustainability.
+                    From humble beginnings, we've blossomed into a beloved brand known for fresh, flavorful, and ethical drinks.
+                  </p>
+                </div>
+                <div className="hero-image" style={{ backgroundImage: `url(${journeyImg})` }}></div>
+              </section>
+      </>
       {/* Carousel Section */}
       <div className="carousel-container">
         <Slider {...settings}>
